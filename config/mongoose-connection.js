@@ -1,11 +1,14 @@
-const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://127.0.0.1:27017/scatch")
-.then(function(){
-   console.log("connected to mongodb");
-})
-.catch(function(err){
-    console.log(err,"doesn't connected to mongodb");             
-})
+const mongoose = require("mongoose");
 
-module.exports = mongoose.connection; 
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URI);
+        console.log("MongoDB Connected");
+    } catch (err) {
+        console.error(err);
+        process.exit(1);
+    }
+};
+
+module.exports = connectDB;

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Products</title>
+
+```
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+```
+
+</head>
+
+<body class="bg-white">
+
+
+
+<!-- Navbar -->
+<nav class="w-full flex justify-between items-center px-10 py-5 border-b">
+    <h1 class="text-2xl font-bold">Admin Panel</h1>
+
+    <div class="flex gap-4">
+        <a href="/shop" class="px-4 py-2 bg-black text-white rounded">
+           View Shop
+        </a>
+
+        <a href="/owners/Products" class="px-4 py-2 bg-blue-500 text-white rounded">
+            Add Product
+        </a>
+    </div>
+</nav>
+
+<div class="w-full flex items-start px-20 py-10">
+
+    <!-- Sidebar -->
+    <div class="w-[25%] flex flex-col items-start">
+
+        <div class="flex items-center gap-2">
+            <h3>Sort By</h3>
+
+            <form action="/owners/products">
+                <select class="border px-2 py-1" name="sortby">
+                    <option value="popular">Popular</option>
+                    <option value="newest">Newest</option>
+                </select>
+            </form>
+        </div>
+
+        <div class="mt-20">
+            <h3 class="mb-3 font-semibold">Filters</h3>
+
+            <a class="block mb-2" href="">Availability</a>
+            <a class="block mb-2" href="">Discount</a>
+        </div>
+
+    </div>
+
+    <!-- Product Cards -->
+    <div class="w-[75%]">
+
+        <div class="flex flex-wrap gap-5">
+
+            <% products.forEach(function(product){ %>
+
+                <div class="w-60 border rounded-lg overflow-hidden shadow-sm">
+
+                    <!-- Product Image -->
+                    <div
+                        class="w-full h-52 flex items-center justify-center"
+                        style="background-color:<%= product.bgcolor %>;"
+                    >
+                        <img
+                            class="h-[12rem]"
+                            src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
+                            alt=""
+                        >
+                    </div>
+
+                    <!-- Product Details -->
+                    <div
+                        class="px-4 py-4"
+                        style="
+                            background-color:<%= product.panelcolor %>;
+                            color:<%= product.textcolor %>;
+                        "
+                    >
+
+                        <h3 class="font-semibold">
+                            <%= product.name %>
+                        </h3>
+
+                        <h4 class="mb-3">
+                            ₹ <%= product.price %>
+                        </h4>
+
+                        <a
+                            href="/owners/editProduct/<%= product._id %>"
+                            class="block text-center w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+                        >
+                            Edit Product
+                        </a>
+                        <a
+                            href="/owners/deleteProduct/<%= product._id %>"
+                            class="block text-center w-full bg-red-500 text-white mt-2 py-2 rounded-md hover:bg-blue-600"
+                        >
+                            Delete Product
+                        </a>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</body>
+</html>
